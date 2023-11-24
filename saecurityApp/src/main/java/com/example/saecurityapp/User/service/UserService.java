@@ -7,29 +7,21 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import com.example.saecurityapp.User.repository.*;
 import com.example.saecurityapp.Role.*;
-import com.example.saecurityapp.confirmationToken.*;
 import com.example.saecurityapp.User.model.*;
 import com.example.saecurityapp.User.dto.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class UserService {
 
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final HostRepository hostRepository;
     private final GuestRepository guestRepository;
     private final RoleRepository roleRepository;
-    private final ConfirmationTokenService confirmationTokenService;
     public User getUserBy(String email) throws UsernameNotFoundException {
         Host host = hostRepository.findByEmail(email).orElse(null);
         if (host != null) {
@@ -46,6 +38,11 @@ public class UserService {
     public void addRoleToGuest(String email, String roleName) {
         User user = guestRepository.findByEmail(email).get();
         Role role = roleRepository.findByName(roleName);
+        if(role == null){
+            role = new Role();
+            role.setName(roleName);
+            roleRepository.save(role);
+        }
         user.getRoles().add(role);
     }
 
@@ -69,17 +66,9 @@ public class UserService {
                 roleRepository.save(role);
             }
             Guest guest = ObjectsMapper.convertRegisterDTOToGuest(registerBodyDTO);
-            guest.setPassword(passwordEncoder.encode(guest.getPassword()));
+            guest.setPassword(new BCryptPasswordEncoder().encode(registerBodyDTO.getPassword()));
             guestRepository.save(guest);
             addRoleToGuest(guest.getEmail(), role.getName());
-            String token = UUID.randomUUID().toString();
-            ConfirmationToken confirmationToken = new ConfirmationToken(
-                    token,
-                    LocalDateTime.now(),
-                    LocalDateTime.now().plusMinutes(30),
-                    guest
-            );
-            confirmationTokenService.saveConfirmationToken(confirmationToken);
         } else {
             if(hostRepository.findByEmail(registerBodyDTO.getEmail()).isPresent())
                 throw new EmailExistException();
@@ -91,17 +80,9 @@ public class UserService {
                 roleRepository.save(role);
             }
             Host host = ObjectsMapper.convertRegisterDTOToHost(registerBodyDTO);
-            host.setPassword(passwordEncoder.encode(host.getPassword()));
+            host.setPassword(new BCryptPasswordEncoder().encode(registerBodyDTO.getPassword()));
             hostRepository.save(host);
             addRoleToHost(host.getEmail(), role.getName());
-            String token = UUID.randomUUID().toString();
-            ConfirmationToken confirmationToken = new ConfirmationToken(
-                    token,
-                    LocalDateTime.now(),
-                    LocalDateTime.now().plusMinutes(30),
-                    host
-            );
-            confirmationTokenService.saveConfirmationToken(confirmationToken);
         }
     }
 
