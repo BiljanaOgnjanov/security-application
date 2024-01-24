@@ -1,0 +1,12 @@
+package repo;
+
+import java.util.UUID;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import model.AccommodationImage;
+
+@Repository
+public interface AccommodationImageRepo extends JpaRepository<AccommodationImage, UUID>{
+
+}
