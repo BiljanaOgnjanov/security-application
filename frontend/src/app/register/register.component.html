@@ -1,0 +1,43 @@
+<div class="register-show">
+    <h1>Register</h1>
+    <table>
+        <tr>
+            <td><span class="keep_hovered">Username: </span></td>
+            <td class="input"><input type="text" name="username" [(ngModel)]="UserDTO.username" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Password: </span></td>
+            <td class="input"><input type="password" name="password" [(ngModel)]="UserDTO.password" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Verify Password: </span></td>
+            <td class="input"><input type="password" name="verifyPassword" [(ngModel)]="verifyPassword" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Email: </span></td>
+            <td class="input"><input type="text" name="email" [(ngModel)]="UserDTO.email" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Fisrt Name: </span></td>
+            <td class="input"><input type="text" name="firstName" [(ngModel)]="UserDTO.firstName" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Last Name: </span></td>
+            <td class="input"><input type="text" name="lastName" [(ngModel)]="UserDTO.lastName" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Adress: </span></td>
+            <td class="input"><input type="text" name="adress" [(ngModel)]="UserDTO.adress" required="required"></td>
+        </tr>
+        <tr>
+            <td ><span class="keep_hovered">Role: </span></td>
+            <td class="input">
+                <select [(ngModel)]="role">
+                    <option value="GUEST">GUEST</option>
+                    <option value="HOST">HOST</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <button (click)="log()">Register</button>
+</div>

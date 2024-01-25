@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li *ngIf="!userRole" class="nav-item active" style="float:right">
+            <a routerLink="/login" style="font-size: 30px; font-weight: bolder;" class="nav-link">Login</a>
+        </li>
+        <li *ngIf="!userRole" class="nav-item active" style="float:right">
+            <a routerLink="/register" style="font-size: 30px; font-weight: bolder;" class="nav-link">Register</a>
+        </li>
+        <li *ngIf="userRole" class="nav-item active" style="float:right">
+            <a routerLink="/home" style="font-size: 30px; font-weight: bolder;" (click)="logout()" class="nav-link">Logout</a>
+        </li>
+      </ul>
+    </div>
+</nav>
