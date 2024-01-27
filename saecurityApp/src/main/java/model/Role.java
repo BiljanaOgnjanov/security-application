@@ -10,11 +10,13 @@ public enum Role {
 	GUEST(			
 			Set.of(
 					Permission.CHANGE_ACCOUNT_INFO,
+					Permission.GET_ACCOUNT_INFO,
 					Permission.DELETE_ACCOUNT
 			)),
 	HOST(
 			Set.of(
 					Permission.CHANGE_ACCOUNT_INFO,
+					Permission.GET_ACCOUNT_INFO,
 					Permission.DELETE_ACCOUNT,
 					Permission.ADD_ACCOMMODATION,
 					Permission.LIST_MY_ACCOMMODATIONS,

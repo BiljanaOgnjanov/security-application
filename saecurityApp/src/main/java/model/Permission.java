@@ -3,6 +3,7 @@ package model;
 
 public enum Permission {
 	CHANGE_ACCOUNT_INFO("change_account_info"),
+	GET_ACCOUNT_INFO("get_account_info"),
 	DELETE_ACCOUNT("delete_account"),
 	ADD_ACCOMMODATION("add_accommodation"),
 	LIST_MY_ACCOMMODATIONS("list_my_accommodations"),
