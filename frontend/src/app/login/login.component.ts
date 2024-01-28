@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -15,7 +16,16 @@ export class LoginComponent implements OnInit {
     username:"",
     password:"",
   }
-
+  setLocalStorage(data:any){
+    if (data ==null){
+      alert("Try again")
+    }else{
+      localStorage.setItem('token', data.token);
+      location.reload();
+    }
+  }
   log() {
+    this._userService.login(this.UserLoginDTO).subscribe(data => this.setLocalStorage(data),
+    error => console.log(error));
   }
 }

@@ -1,0 +1,43 @@
+<div class="register-show">
+    <h1>Add Accommodation</h1>
+    <table>
+        <tr>
+            <td><span class="keep_hovered">Name: </span></td>
+            <td class="input"><input type="text" name="name" [(ngModel)]="AccommodationDTO.name" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Location: </span></td>
+            <td class="input"><input type="text" name="adress" [(ngModel)]="AccommodationDTO.location" required="required"></td>
+        </tr>
+        <tr>
+            <td ><span class="keep_hovered">Price Calculation: </span></td>
+            <td class="input">
+                <select [(ngModel)]="AccommodationDTO.priceCalculation">
+                    <option value="PER_GUEST_PER_NIGHT">Per Guest</option>
+                    <option value="PER_ACCOMMODATION_PER_NIGHT">Per Accommodation</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Amenity: </span></td>
+            <td class="input"><input type="text" name="amenity" [(ngModel)]="AmenityDTO.amenity"></td>
+            <td><button (click)="addService()">Add amenity</button></td>
+        </tr>
+        <tr>
+            <ul>
+                <li *ngFor="let amenity of AccommodationDTO.amenities">{{amenity.amenity}} <button class="red"(click)="removeService(amenity)">Remove amenity</button></li>
+            </ul>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Image: </span></td>
+            <td class="input"><input type="file" name="file" accept="image/*" (change)="onSelectNewFile($event)"></td>
+        </tr>
+        <tr>
+            <ul>
+                <li *ngFor="let picture of AccommodationDTO.accommodationImages"><img src="{{picture.img}}" height="80" width="100"/> <button class="red"(click)="removePicture(picture)">Remove picutre</button></li>
+            </ul>
+        </tr>
+    </table>
+
+    <button (click)="log()">Add</button>
+</div>  

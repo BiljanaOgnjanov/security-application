@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -25,8 +26,12 @@ export class RegisterComponent implements OnInit {
   log() {
     if(this.verifyPassword === this.UserDTO.password){
       if (this.role === "HOST"){
+        this._userService.registerHost(this.UserDTO).subscribe(data => console.log(data),
+        error => console.log(error));
       }
       if(this.role === "GUEST"){
+        this._userService.registerGuest(this.UserDTO).subscribe(data => console.log(data),
+        error => console.log(error));
       }         
     }
     else{

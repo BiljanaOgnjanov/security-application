@@ -1,0 +1,12 @@
+<table>
+    <tr>
+        <td><span class="keep_hovered">Accommodation Name</span></td>
+        <td><span class="keep_hovered">Adress</span></td>
+        <td><span class="keep_hovered"></span></td>
+    </tr>
+    <tr *ngFor="let accommodation of accommodations">
+        <td routerLink="/accommodation-details/{{accommodation.id}}"><span class="keep_hovered">{{accommodation.name}}</span></td>
+        <td routerLink="/accommodation-details/{{accommodation.id}}"><span class="keep_hovered">{{accommodation.location}}</span></td>
+        <td><button class="keep_hovered red" (click)="deleteHome(accommodation.id)">Delete</button></td>
+    </tr>
+</table>

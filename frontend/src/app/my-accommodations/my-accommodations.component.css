@@ -1,0 +1,52 @@
+input[type=text], [type=password], [type=date] {
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box; 
+  }
+  .red{
+    background-color: red;
+  }
+  input[type=checkbox]{
+    width: 10%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box; 
+  }
+  input:focus {
+    background-color: lightblue;
+  }
+  select {
+    width: 25%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 4px;
+  }
+  select:focus {
+    background-color: lightblue;
+  }
+  button {
+    background-color: #8a6b05;
+    border: none;
+    color: white;
+    padding: 14px 25px;
+    text-decoration: none;
+    margin: 4px 20px;
+    cursor: pointer;
+  }
+  textarea{
+    height: 80px;
+    width: 100%;
+  }
+  .input{
+    width: 300px;
+    float: right;
+  }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  table {
+    width: 100%;
+  }

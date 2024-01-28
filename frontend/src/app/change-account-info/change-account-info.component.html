@@ -1,0 +1,26 @@
+<div class="register-show">
+    <h1>Change Account Info</h1>
+    <table>
+        <tr>
+            <td><span class="keep_hovered">Username: </span></td>
+            <td class="input"><input type="text" name="username" [(ngModel)]="ChangeAccountInfoRequest.username" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Email: </span></td>
+            <td class="input"><input type="text" name="email" [(ngModel)]="ChangeAccountInfoRequest.email" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Fisrt Name: </span></td>
+            <td class="input"><input type="text" name="firstName" [(ngModel)]="ChangeAccountInfoRequest.firstName" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Last Name: </span></td>
+            <td class="input"><input type="text" name="lastName" [(ngModel)]="ChangeAccountInfoRequest.lastName" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Adress: </span></td>
+            <td class="input"><input type="text" name="adress" [(ngModel)]="ChangeAccountInfoRequest.adress" required="required"></td>
+        </tr>
+    </table>
+    <button (click)="log()">Save</button>
+</div>
