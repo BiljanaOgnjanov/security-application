@@ -1,0 +1,41 @@
+<div id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">Location: </span><input type="text" name="location" [(ngModel)]="searchDTO.location" required="required"></td>
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">Guests: </span><input type="text" name="guests" [(ngModel)]="searchDTO.guests" required="required"></td>
+      </li>
+      <br>
+      <li class="nav-item active">
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">Max Price: </span><input type="text" name="maxPrice" [(ngModel)]="searchDTO.maxPrice" required="required"></td>
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">Min Price: </span><input type="text" name="minPrice" [(ngModel)]="searchDTO.minPrice" required="required"></td>
+      </li>
+      <br>
+      <li class="nav-item active">
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">End Date: </span><input type="date" name="endDate" [(ngModel)]="searchDTO.endDate" required="required"></td>
+        <td style="font-size: 30px; font-weight: bolder; margin-left: 2%; margin-right: 2%;" class="input"><span class="keep_hovered">Begin Date: </span><input type="date" name="beginDate" [(ngModel)]="searchDTO.beginDate" required="required"></td>
+      </li>
+    </ul>
+    <br>
+    <tr>
+        <td><span class="keep_hovered">Amenity: </span></td>
+        <td class="input"><input type="text" name="amenity" [(ngModel)]="amenity"></td>
+        <td><button (click)="addService()">Add amenity</button></td>
+    </tr>
+    <tr>
+        <ul>
+            <li *ngFor="let amenity of searchDTO.amenities">{{amenity}} <button class="red"(click)="removeService(amenity)">Remove amenity</button></li>
+        </ul>
+    </tr>
+</div><button (click)="log()">Search</button>
+<table>
+    <tr>
+        <td><span class="keep_hovered">Accommodation Name</span></td>
+        <td><span class="keep_hovered">Location</span></td>
+        <td><span class="keep_hovered">Total Price</span></td>
+    </tr>
+    <tr *ngFor="let accommodationRes of accommodationSeachResult">
+        <td routerLink="/accommodation-details-guest/{{accommodationRes.accommodation.id}}"><span class="keep_hovered">{{accommodationRes.accommodation.name}}</span></td>
+        <td routerLink="/accommodation-details-guest/{{accommodationRes.accommodation.id}}"><span class="keep_hovered">{{accommodationRes.accommodation.location}}</span></td>
+        <td routerLink="/accommodation-details-guest/{{accommodationRes.accommodation.id}}"><span class="keep_hovered">{{accommodationRes.calculatedPrice}}</span></td>
+    </tr>
+</table>

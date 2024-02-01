@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-accommodation',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddAccommodationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _userService: UserService,private router: Router) { }
 
   ngOnInit(): void {
+    this._userService.getMyAcoommodations().subscribe(data => null,
+      error => console.log(error));
     this.AccommodationDTO.amenities.length = 0
     this.AccommodationDTO.accommodationImages.length = 0
     
@@ -33,6 +37,8 @@ export class AddAccommodationComponent implements OnInit {
   }
 
   log() {
+    this._userService.addAccommodation(this.AccommodationDTO).subscribe(data => this.router.navigate(['/my-accommodations']),
+    error => console.log(error));
   }
   addService() {
     this.AccommodationDTO.amenities.push(JSON.parse(JSON.stringify(this.AmenityDTO)))

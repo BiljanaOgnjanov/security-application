@@ -1,10 +1,10 @@
 package model;
 
+import java.util.Date;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,46 +14,47 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @Entity
-@NoArgsConstructor
-public class AccommodationImage {
+public class UserToken {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private UUID id;
-	@Column(columnDefinition = "TEXT")
-	private String img;
+	private UserTokenUse status;
+	private Date created;
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="accommodation_id")
-	private Accommodation accommodation;
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="appuser_id")
+    private AppUser appUser;
+	
 	public UUID getId() {
 		return id;
 	}
-
 	public void setId(UUID id) {
 		this.id = id;
 	}
-
-	public String getImg() {
-		return img;
+	public UserTokenUse getStatus() {
+		return status;
 	}
-
-	public void setImg(String img) {
-		this.img = img;
+	public void setStatus(UserTokenUse status) {
+		this.status = status;
 	}
-
-	public Accommodation getAccommodation() {
-		return accommodation;
+	public Date getCreated() {
+		return created;
 	}
-
-	public void setAccommodation(Accommodation accommodation) {
-		this.accommodation = accommodation;
+	public void setCreated(Date created) {
+		this.created = created;
 	}
+	public AppUser getAppUser() {
+		return appUser;
+	}
+	public void setAppUser(AppUser appUser) {
+		this.appUser = appUser;
+	}
+	
+	
 	
 	
 }

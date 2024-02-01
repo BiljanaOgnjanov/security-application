@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -8,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class NavbarComponent implements OnInit {
   private jwtHelper: JwtHelperService;
-  constructor() {this.jwtHelper = new JwtHelperService(); }
+  constructor(private router: Router) {this.jwtHelper = new JwtHelperService(); }
   userRole : any
   ngOnInit(): void {
     var token =  JSON.stringify(localStorage.getItem('token'));
@@ -32,6 +33,6 @@ export class NavbarComponent implements OnInit {
   }
   localStorage.removeItem('token');
   this.userRole = null
-  location.reload();
+  this.router.navigate(['/home']);
   }
 }

@@ -4,18 +4,16 @@ import { UserService } from '../user.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-accommodation-details',
-  templateUrl: './accommodation-details.component.html',
-  styleUrls: ['./accommodation-details.component.css']
+  selector: 'app-accommodation-details-guest',
+  templateUrl: './accommodation-details-guest.component.html',
+  styleUrls: ['./accommodation-details-guest.component.css']
 })
-export class AccommodationDetailsComponent implements OnInit {
+export class AccommodationDetailsGuestComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private _userService: UserService) { }
   private routeSub: Subscription = Subscription.EMPTY;
   private id:string = "";
   ngOnInit(): void {
-    this._userService.getMyAcoommodations().subscribe(data => null,
-      error => console.log(error));
     this.routeSub = this.route.params.subscribe(params => {
       this.id = params['id'];
     });
@@ -73,5 +71,4 @@ export class AccommodationDetailsComponent implements OnInit {
   timeSlots = [{endDate:"",startingDate:"",status:""}]
   getTimeSlots() {
   }
-  
 }

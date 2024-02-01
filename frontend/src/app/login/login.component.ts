@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { UserService } from '../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +22,10 @@ export class LoginComponent implements OnInit {
       alert("Try again")
     }else{
       localStorage.setItem('token', data.token);
-      location.reload();
+      this.router.navigate(['/home'])
+      .then(() => {
+        window.location.reload();
+        });
     }
   }
   log() {

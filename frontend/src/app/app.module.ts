@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import {AuthModule} from '@auth0/auth0-angular'
+import {AuthGuard, AuthModule, AuthService} from '@auth0/auth0-angular'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +13,11 @@ import { AddAccommodationComponent } from './add-accommodation/add-accommodation
 import { ChangeAccountInfoComponent } from './change-account-info/change-account-info.component';
 import { AccommodationDetailsComponent } from './accommodation-details/accommodation-details.component';
 import { MyAccommodationsComponent } from './my-accommodations/my-accommodations.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
+import { HomeComponent } from './home/home.component';
+import { AccommodationDetailsGuestComponent } from './accommodation-details-guest/accommodation-details-guest.component';
 
 @NgModule({
   declarations: [
@@ -24,16 +28,24 @@ import { HttpClientModule } from '@angular/common/http';
     AddAccommodationComponent,
     ChangeAccountInfoComponent,
     AccommodationDetailsComponent,
-    MyAccommodationsComponent
+    MyAccommodationsComponent,
+    HomeComponent,
+    AccommodationDetailsGuestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule,
-    AuthModule
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthGuard,
+    {provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

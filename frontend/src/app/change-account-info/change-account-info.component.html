@@ -23,4 +23,20 @@
         </tr>
     </table>
     <button (click)="log()">Save</button>
+    <h1>Change Password</h1>
+    <table>
+        <tr>
+            <td><span class="keep_hovered">Old Password: </span></td>
+            <td class="input"><input type="password" name="oldPassword" [(ngModel)]="ChangePasswordRequest.oldPassword" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">New Password: </span></td>
+            <td class="input"><input type="password" name="newPassword" [(ngModel)]="ChangePasswordRequest.newPassword" required="required"></td>
+        </tr>
+        <tr>
+            <td><span class="keep_hovered">Verify Password: </span></td>
+            <td class="input"><input type="password" name="verifyPassword" [(ngModel)]="checkPassword" required="required"></td>
+        </tr>
+    </table>
+    <button (click)="changePass()">Change Password</button>
 </div>

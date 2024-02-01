@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import config.JwtService;
 import dto.AuthenticationResponse;
 import dto.ChangeAccountInfoRequest;
+import dto.ChangePasswordRequest;
 import service.AppUserService;
+import service.ValidationService;
 
 @RestController
 @RequestMapping(value = "api/user")
@@ -25,12 +27,30 @@ public class AppUserController {
 	private AppUserService appUserService;
 	@Autowired
 	private JwtService jwtService;
+	@Autowired
+	private ValidationService validaiontService;
 	
 	@CrossOrigin
 	@PostMapping(value = "/changeAcoountInfo")
 	@PreAuthorize("hasAuthority('change_account_info')")
-    public ResponseEntity<AuthenticationResponse> changeAcoountInfo(@RequestBody ChangeAccountInfoRequest request, @RequestHeader (name="Authorization") String token) {
-		return new ResponseEntity<>(appUserService.changeAccountInfo(request, jwtService.extractUsername(token.substring(7))), HttpStatus.OK);
+    public ResponseEntity<AuthenticationResponse> changeAcoountInfo(@RequestBody ChangeAccountInfoRequest request, @RequestHeader (name="Authorization") String token) {		
+		if(validaiontService.validate(request)) {
+			return new ResponseEntity<>(appUserService.changeAccountInfo(request, jwtService.extractUsername(token.substring(7))), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
+	@CrossOrigin
+	@PostMapping(value = "/changePassword")
+	@PreAuthorize("hasAuthority('change_account_info')")
+    public ResponseEntity<Object> changePassword(@RequestBody ChangePasswordRequest request, @RequestHeader (name="Authorization") String token) {		
+		if(validaiontService.validate(request)) {
+			return new ResponseEntity<>(appUserService.changePassword(request, jwtService.extractUsername(token.substring(7))), HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
 	@CrossOrigin
 	@GetMapping(value = "/acoountInfo")
@@ -44,5 +64,4 @@ public class AppUserController {
     public ResponseEntity<String> deleteAccount() {
 		return new ResponseEntity<>("deleteAccount GOOD", HttpStatus.OK);
 	}
-	
 }

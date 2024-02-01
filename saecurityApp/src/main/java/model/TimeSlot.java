@@ -37,6 +37,12 @@ public class TimeSlot {
     @JoinColumn(name="accommodation_id")
     private Accommodation accommodation;
 	
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
 	public Date getStartDate() {
 		return startDate;
 	}
